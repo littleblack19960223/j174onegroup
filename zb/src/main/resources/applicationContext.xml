@@ -41,7 +41,7 @@
 	<!--会话工厂-->
 	<bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="data"></property>
-		<property name="typeAliasesPackage" value="com.project.bean"></property>
+		<property name="typeAliasesPackage" value="com.project.entity"></property>
 		<property name="mapperLocations" value="classpath:orm/*.xml"></property>
 	</bean>
 

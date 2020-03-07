@@ -8,8 +8,7 @@ public class StudentEntity {
     public StudentEntity() {
     }
 
-    public StudentEntity(int id, String name, String phone) {
-        this.id = id;
+    public StudentEntity(String name, String phone) {
         this.name = name;
         this.phone = phone;
     }
