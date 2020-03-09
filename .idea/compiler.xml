@@ -8,6 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="cy" />
         <module name="fsj" />
+        <module name="fsjSpringMVC" />
+        <module name="fsjSpringService" />
         <module name="zb" />
         <module name="zhp" />
       </profile>

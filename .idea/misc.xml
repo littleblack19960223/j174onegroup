@@ -4,6 +4,8 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/cy" />
     <file type="web" url="file://$PROJECT_DIR$/fsj" />
+    <file type="web" url="file://$PROJECT_DIR$/fsjSpringMVC" />
+    <file type="web" url="file://$PROJECT_DIR$/fsjSpringService" />
     <file type="web" url="file://$PROJECT_DIR$/zb" />
     <file type="web" url="file://$PROJECT_DIR$/zhp" />
   </component>

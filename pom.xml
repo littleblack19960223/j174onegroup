@@ -13,6 +13,8 @@
         <module>fsj</module>
         <module>zb</module>
         <module>zhp</module>
+        <module>fsjSpringMVC</module>
+        <module>fsjSpringService</module>
     </modules>
 
 
