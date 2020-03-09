@@ -17,10 +17,10 @@ public class StudentTest {
 
     @Test
     public void test(){
-        //System.out.println(service.findAll());
+        System.out.println(service.findAll());
         //service.add(new StudentEntity("测试A","1234567811"));
         //service.delById(7);
-        service.updatePhoneById(6,"111");
+        //service.updatePhoneById(6,"111");
     }
 
 }

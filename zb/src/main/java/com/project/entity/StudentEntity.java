@@ -1,5 +1,4 @@
 package com.project.entity;
-
 public class StudentEntity {
     private int id;
     private String name;
