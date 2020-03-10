@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns="http://www.springframework.org/schema/beans"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+                   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+              http://www.springframework.org/schema/tx
+              http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+              http://www.springframework.org/schema/context
+              http://www.springframework.org/schema/context/spring-context-4.0.xsd
+              http://www.springframework.org/schema/aop
+                            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+	<bean id="data" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/db4?characterEncoding=utf-8&amp;allowMultiQueries=true"></property>
+		<!--用户名-->
+		<property name="username" value="root"></property>
+		<!--密码-->
+		<property name="password" value="729194822"></property>
+
+		<!--配置连接池相关信息-->
+		<!--初始连接数量-->
+		<property name="initialSize" value="10"></property>
+		<!--最大连接-->
+		<property name="maxActive" value="100"></property>
+		<!--等待时间-->
+		<property name="maxWait" value="1000"></property>
+		<!--最小连接数-->
+		<property name="minIdle" value="20"></property>
+	</bean>
+
+	<!--配置输出日志-->
+	<bean class="org.apache.ibatis.session.Configuration">
+		<property name="logImpl" value="org.apache.ibatis.logging.stdout.StdOutImpl"></property>
+	</bean>
+
+	<!--会话工厂-->
+	<bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="data"></property>
+		<property name="typeAliasesPackage" value="com.project.entity"></property>
+		<property name="mapperLocations" value="classpath:orm/*.xml"></property>
+	</bean>
+
+	<!--配置产生mapper-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!--指定mapper所在的包-->
+		<property name="basePackage" value="com.project.mapper"></property>
+		<!--引用会话工厂的引用名称-->
+		<property name="sqlSessionFactoryBeanName" value="factory"></property>
+	</bean>
+
+	<!--springAOP实现实务-->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+          <property name="dataSource" ref="data"></property>
+	</bean>
+
+	<!--允许注解方式配置实务管理器-->
+	<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+
+	<!--扫描spring组件-->
+	<context:component-scan base-package="com.project"></context:component-scan>
+
+</beans>
