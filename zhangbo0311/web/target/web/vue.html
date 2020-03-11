@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--Vue-->
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <!--AJAX-->
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <!--Axios-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+<h1>注册</h1>
+<form id="add" method="post">
+    <span style="font-size: 10px">{{info}}</span>
+    姓名：<input type="text" v-model="name"><span style="font-size: 10px">{{name}}</span><br>
+    电话：<input type="text" v-model="phone"><span style="font-size: 10px">{{phone}}</span><br>
+    <button @click="register">注册</button>
+</form>
+<br><br><br><br>
+
+
+<h1>查询</h1>
+<div id="list">
+    <table border="1">
+        <tr>
+            <td>名称</td>
+            <td>电话</td>
+        </tr>
+        <tr v-for="obj in infoObj">
+            <td>{{obj.name}}</td>
+            <td>{{obj.phone}}</td>
+        </tr>
+    </table>
+    <button @click="findAll">查询</button>
+</div>
+
+
+<script>
+    new Vue({
+        el: "#add",
+        data: {
+            name: "",
+            phone: "",
+            info:""
+        },
+        methods: {
+            register: function () {
+                axios({
+                    method:'post',
+                    url:'addStudent',
+                    data: {'name':this.name,'phone':this.phone}
+                }).then(response=>{
+                    if (response.data=='ok'){
+                        this.info='注册成功'
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        }
+    });
+
+
+
+    new Vue({
+        el:"#list",
+        data:{
+            infoObj:""
+        },
+        methods:{
+            findAll:function () {
+                axios({
+                    method:'post',
+                    url:'fiandAll'
+                }).then(response=>{
+                    this.infoObj=JSON.parse(response.data);
+                    alert(infoObj);
+                    alert(response);
+                    alert(response.data);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        }
+    });
+
+</script>
+
+
+</body>
+</html>
